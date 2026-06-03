@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adith C | Portfolio</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --bg-2: #0b0b0b;
+      --panel: #101010;
+      --panel-2: #141414;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f5f5f5;
+      --muted: rgba(245, 245, 245, 0.65);
+      --soft: rgba(245, 245, 245, 0.09);
+      --accent: #6be700;
+      --accent-2: #9cff57;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(107, 231, 0, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(156, 255, 87, 0.08), transparent 24%),
+        linear-gradient(180deg, #040404 0%, #080808 40%, #0b0b0b 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(5, 5, 5, 0.75);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .socials {
+      display: flex;
+      gap: 14px;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero {
+      padding: 72px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 42px;
+      align-items: center;
+      min-height: 72vh;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 7px rgba(107, 231, 0, 0.12);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      margin-bottom: 18px;
+      max-width: 10ch;
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 60ch;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      min-width: 180px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #52c800);
+      color: #041100;
+      box-shadow: 0 12px 30px rgba(107, 231, 0, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .worked-with {
+      margin-top: 12px;
+    }
+
+    .worked-with p {
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .logos {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .logo-card {
+      min-height: 70px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      display: grid;
+      place-items: center;
+      color: rgba(245, 245, 245, 0.45);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .portrait-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .portrait {
+      width: min(100%, 430px);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.12), transparent 45%),
+        linear-gradient(135deg, rgba(107, 231, 0, 0.28), rgba(255,255,255,0.05));
+      display: grid;
+      place-items: center;
+    }
+
+    .portrait-inner {
+      width: 92%;
+      height: 92%;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        linear-gradient(135deg, #1b1b1b, #0e0e0e);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .portrait-inner .initials {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+      color: var(--accent);
+      text-shadow: 0 0 20px rgba(107, 231, 0, 0.22);
+    }
+
+    .portrait-inner .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 48px 0 82px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      padding: 24px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .skill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: #f1f1f1;
+      font-size: 0.92rem;
+    }
+
+    .project {
+      display: grid;
+      gap: 14px;
+      height: 100%;
+    }
+
+    .project-thumb {
+      aspect-ratio: 16 / 9;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(107,231,0,0.24), transparent 26%),
+        linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .project-meta span {
+      color: var(--accent-2);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .link {
+      color: #d7ffb8;
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .timeline .item + .item {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .timeline .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+
+    .timeline .top strong {
+      font-size: 1.05rem;
+    }
+
+    .timeline .top span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .contact-item {
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+    }
+
+    .contact-item strong {
+      color: var(--text);
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0 34px;
+      color: var(--muted);
+      text-align: center;
+      background: rgba(255,255,255,0.01);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .logos {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 44px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .logos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-links,
+      .socials {
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Adith C</div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Get in Touch</a>
+      </nav>
+      <div class="socials">
+        <a href="#">in</a>
+        <a href="#">Bē</a>
+        <a href="#">𝕏</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span> B.Tech CSE (Data Science) Student</div>
+          <h1>Adith C</h1>
+          <p class="intro">
+            Hi, I'm Adith C, a 20-year-old B.Tech Computer Science Engineering
+            (Data Science) student. I'm passionate about software development,
+            data analytics, machine learning, and creating modern web experiences.
+            I enjoy turning ideas into practical solutions through code and
+            continuously expanding my technical skills.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View My Work</a>
+            <a class="btn btn-secondary" href="#contact">Contact Me</a>
+          </div>
+
+          <div class="worked-with">
+            <p>Skills and tools</p>
+            <div class="logos">
+              <div class="logo-card">Python</div>
+              <div class="logo-card">Java</div>
+              <div class="logo-card">SQL</div>
+              <div class="logo-card">GitHub</div>
+              <div class="logo-card">Excel</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="portrait-wrap">
+          <div class="portrait">
+            <div class="portrait-inner">
+              <div>
+                <div class="initials">AC</div>
+                <div class="caption">Add your photo here later</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>About Me</h2>
+            <p>
+              A short professional introduction that fits a modern portfolio and tells people what you study,
+              what you are good at, and what you are looking for.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Profile</h3>
+            <p>
+              I am Adith C, a B.Tech Computer Science Engineering student in the Data Science stream.
+              I am building a strong foundation in programming, data handling, and software development.
+            </p>
+            <p style="margin-top: 12px;">
+              I like creating clean, responsive user interfaces and learning how technology can solve real-world problems.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Education</h3>
+            <p><strong style="color:#fff;">B.Tech in Computer Science Engineering (Data Science)</strong></p>
+            <p>Currently studying and improving skills in programming, databases, analytics, and web development.</p>
+            <p style="margin-top: 12px;"><strong style="color:#fff;">Age:</strong> 20</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Skills</h2>
+            <p>
+              A balanced mix of technical and practical skills relevant to a CSE/Data Science student.
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="skill-list">
+            <span class="skill">Python</span>
+            <span class="skill">C Programming</span>
+            <span class="skill">Java</span>
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">SQL</span>
+            <span class="skill">DBMS</span>
+            <span class="skill">Git & GitHub</span>
+            <span class="skill">Data Science Basics</span>
+            <span class="skill">Machine Learning Basics</span>
+            <span class="skill">Problem Solving</span>
+            <span class="skill">Data Visualization</span>
+            <span class="skill">MS Excel</span>
+            <span class="skill">Jupyter Notebook</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Recent Work</h2>
+            <p>
+              Replace these examples with your real projects. Project cards look good even if they are simple.
+            </p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <article class="card project">
+            <div class="project-thumb"></div>
+            <div class="project-meta">
+              <h3>Portfolio Website</h3>
+              <span>Frontend</span>
+            </div>
+            <p>
+              A clean personal portfolio website made with HTML, CSS, and responsive design principles.
+            </p>
+            <div class="project-links">
+              <a class="link" href="#">Live Demo</a>
+              <a class="link" href="#">Source Code</a>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project-thumb"></div>
+            <div class="project-meta">
+              <h3>Data Analysis Dashboard</h3>
+              <span>Data Science</span>
+            </div>
+            <p>
+              A dashboard or analysis project focused on cleaning data, visualizing trends, and drawing insights.
+            </p>
+            <div class="project-links">
+              <a class="link" href="#">View Project</a>
+              <a class="link" href="#">Case Study</a>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project-thumb"></div>
+            <div class="project-meta">
+              <h3>Student Management System</h3>
+              <span>Programming</span>
+            </div>
+            <p>
+              A basic system project built to practice logic, CRUD operations, and structured coding.
+            </p>
+            <div class="project-links">
+              <a class="link" href="#">View Project</a>
+              <a class="link" href="#">Source Code</a>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project-thumb"></div>
+            <div class="project-meta">
+              <h3>Machine Learning Demo</h3>
+              <span>ML Basics</span>
+            </div>
+            <p>
+              A beginner-level machine learning project showing prediction, training, and evaluation fundamentals.
+            </p>
+            <div class="project-links">
+              <a class="link" href="#">View Project</a>
+              <a class="link" href="#">Notebook</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Education & Experience</h2>
+            <p>
+              Add internships, certifications, workshops, hackathons, or volunteering here.
+            </p>
+          </div>
+        </div>
+
+        <div class="card timeline">
+          <div class="item">
+            <div class="top">
+              <strong>B.Tech CSE (Data Science)</strong>
+              <span>Current</span>
+            </div>
+            <p>Studying core computer science subjects along with data science and analytics topics.</p>
+          </div>
+
+          <div class="item">
+            <div class="top">
+              <strong>Internship / Training</strong>
+              <span>Add Dates</span>
+            </div>
+            <p>Describe the organization, responsibilities, and technologies you used during the internship.</p>
+          </div>
+
+          <div class="item">
+            <div class="top">
+              <strong>Certification Projects</strong>
+              <span>Add Dates</span>
+            </div>
+            <p>List any certifications, workshops, or project-based learning relevant to your profile.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Get in Touch</h2>
+            <p>
+              Keep your contact section simple and direct.
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <div class="card">
+            <h3>Contact Details</h3>
+            <p>
+              Open for internships, collaborations, and project opportunities.
+            </p>
+            <div class="contact-list">
+              <div class="contact-item"><strong>Email:</strong> <a href="mailto:adhiadith110@gmail.com">adhiadith110@gmail.com</a></div>
+              <div class="contact-item"><strong>Phone:</strong> +91 8606217748</div>
+              <div class="contact-item"><strong>Location:</strong> Kerala,India</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Profiles</h3>
+            <p>Link your professional pages here.</p>
+            <div class="contact-list">
+              <div class="contact-item">LinkedIn</div>
+              <div class="contact-item">GitHub</div>
+              <div class="contact-item">Behance / Instagram</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 Adith C. All rights reserved.</div>
+  </footer>
+</body>
+</html>
